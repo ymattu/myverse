@@ -87,8 +87,7 @@ RUN /bin/bash -c "source /etc/default/locale"
 RUN ln -sf  /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
 ## Install additional R packages
-RUN Rscript -e "install.packages(c('githubinstall','tm','slam'))"
+RUN Rscript -e "install.packages(c('githubinstall','tm','slam','tidytext'))"
 RUN Rscript -e "install.packages('RMeCab',repos='http://rmecab.jp/R')"
-RUN Rscript -e "devtools::install_github(ymattu/MlBayesOpt)"
 
 CMD ["/init"]
