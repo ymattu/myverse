@@ -1,4 +1,4 @@
-FROM rocker/tidyverse:3.3.3
+FROM rocker/tidyverse:latest
 MAINTAINER "ymattu"
 
 RUN apt-get update \
