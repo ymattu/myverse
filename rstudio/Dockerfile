@@ -35,7 +35,7 @@ RUN apt-get update \
   ## And some nice R packages for publishing-related stuff
   && . /etc/environment \
   && install2.r --error --repos $MRAN --deps TRUE \
-    bookdown rticles rmdshower
+    bookdown rticles rmdshower rstan
 
 ## For Japanse LaTeX environment
 RUN apt-get update && apt-get upgrade -y \
@@ -48,7 +48,7 @@ RUN apt-get update && apt-get upgrade -y \
     && wget --directory-prefix=/install \
             https://raw.githubusercontent.com/kenjimyzk/rstudio-latex/master/installation.profile \
     && ./install/install-tl --profile /install/installation.profile \
-    && rm -R /install && apt-get clean    
+    && rm -R /install && apt-get clean
 RUN tlmgr update --self --all
 RUN apt-get install -y equivs
 RUN wget http://www.tug.org/texlive/files/debian-equivs-2016-ex.txt
@@ -88,6 +88,7 @@ RUN ln -sf  /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
 ## Install additional R packages
 RUN Rscript -e "install.packages(c('githubinstall','tm','slam','tidytext'))"
+RUN Rscript -e "install.packages(c('ggmcmc','rstanarm','ellipse','hexbin','ggtern','mvtnorm','bda','Nippon','ggrepel'))"
 RUN Rscript -e "install.packages('RMeCab',repos='http://rmecab.jp/R')"
 
 CMD ["/init"]
