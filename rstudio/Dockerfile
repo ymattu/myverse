@@ -35,7 +35,7 @@ RUN apt-get update \
   ## And some nice R packages for publishing-related stuff
   && . /etc/environment \
   && install2.r --error --repos $MRAN --deps TRUE \
-    bookdown rticles rmdshower rstan
+    bookdown rticles rmdshower
 
 ## For Japanse LaTeX environment
 RUN apt-get update && apt-get upgrade -y \
