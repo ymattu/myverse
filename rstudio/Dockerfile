@@ -88,7 +88,7 @@ RUN ln -sf  /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
 ## Install additional R packages
 RUN Rscript -e "install.packages(c('githubinstall','tm','slam','tidytext'))"
-RUN Rscript -e "install.packages(c('ggmcmc','rstanarm','ellipse','hexbin','ggtern','mvtnorm','bda','Nippon','ggrepel'))"
+# RUN Rscript -e "install.packages(c('ggmcmc','rstanarm','ellipse','hexbin','ggtern','mvtnorm','bda','Nippon','ggrepel'))"
 RUN Rscript -e "install.packages('RMeCab',repos='http://rmecab.jp/R')"
 
 CMD ["/init"]
