@@ -58,30 +58,6 @@ RUN apt-get install -y freeglut3 fonts-ipaexfont fonts-ipafont
 RUN dpkg -i texlive-local_2016-2_all.deb \
     && apt-get clean
 
-# Install rstan
-RUN install2.r --error --deps TRUE \
-    rstan \
-    && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
-
-# Config for rstudio user
-RUN mkdir -p $HOME/.R/ \
-    && echo "CXXFLAGS=-O3 -mtune=native -march=native -Wno-unused-variable -Wno-unused-function -flto -ffat-lto-objects  -Wno-unused-local-typedefs -Wno-ignored-attributes -Wno-deprecated-declarations\n" >> $HOME/.R/Makevars \
-    && echo "rstan::rstan_options(auto_write = TRUE)\n" >> /home/rstudio/.Rprofile \
-    && echo "options(mc.cores = parallel::detectCores())\n" >> /home/rstudio/.Rprofile
-
-# Install packages related to rstan
-RUN install2.r --error --deps TRUE \
-    loo \
-    bayesplot \
-    rstanarm \
-    rstantools \
-    shinystan \
-    ggmcmc \
-    Nippon \
-    ggrepel \
-    ggtern \
-    && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
-
 ## Mecab
 RUN wget -O mecab-0.996.tar.gz "https://drive.google.com/uc?export=download&id=0B4y35FiV1wh7cENtOXlicTFaRUE" ;\
     tar -xzf mecab-0.996.tar.gz ;\
